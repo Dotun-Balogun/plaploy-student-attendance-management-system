@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 import { initials, cn } from "@/lib/utils";
 import { signOut } from "@/lib/actions/auth";
 import type { UserRole } from "@/lib/database.types";
-import { NAV_ITEMS } from "./Sidebar"; // Import NAV_ITEMS directly
+import { NAV_ITEMS } from "./sidebar";
 
 export function Header({
   title,
