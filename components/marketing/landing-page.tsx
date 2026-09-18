@@ -92,7 +92,7 @@ export function LandingPage() {
             Technology for Progress
           </span>
           <h1 className="mt-5 text-balance font-display text-4xl font-medium leading-tight sm:text-5xl">
-            Attendance, tracked properly — for every classroom at PSP.
+            Attendance, tracked properly — for every classroom at PLAPOLY.
           </h1>
           <p className="mt-5 text-lg text-muted-foreground">
             Students request their courses, lecturers approve and mark attendance, and everyone —
