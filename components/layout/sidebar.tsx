@@ -24,7 +24,7 @@ interface NavItem {
   icon: LucideIcon;
 }
 
-const NAV_ITEMS: Record<UserRole, NavItem[]> = {
+export const NAV_ITEMS: Record<UserRole, NavItem[]> = {
   admin: [
     { href: "/admin", label: "Overview", icon: LayoutDashboard },
     { href: "/admin/students", label: "Students", icon: GraduationCap },
