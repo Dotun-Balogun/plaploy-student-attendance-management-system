@@ -24,7 +24,7 @@ interface NavItem {
   icon: LucideIcon;
 }
 
-export const NAV_ITEMS: Record<UserRole, NavItem[]> = {
+const NAV_ITEMS: Record<UserRole, NavItem[]> = {
   admin: [
     { href: "/admin", label: "Overview", icon: LayoutDashboard },
     { href: "/admin/students", label: "Students", icon: GraduationCap },
@@ -45,12 +45,17 @@ export const NAV_ITEMS: Record<UserRole, NavItem[]> = {
   ],
 };
 
-export function Sidebar({ role }: { role: UserRole }) {
+/**
+ * The branding + nav links + footer shared by the fixed desktop sidebar and
+ * the mobile slide-out drawer (see components/layout/mobile-nav.tsx).
+ * `onNavigate` lets the drawer close itself when a link is tapped.
+ */
+export function SidebarContent({ role, onNavigate }: { role: UserRole; onNavigate?: () => void }) {
   const pathname = usePathname();
   const items = NAV_ITEMS[role];
 
   return (
-    <aside className="print-hide hidden w-64 shrink-0 flex-col bg-sidebar text-sidebar-foreground md:flex">
+    <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex items-center gap-3 px-5 py-5">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-white p-1">
           <Image src="/psp-logo.jpg" alt="Plateau State Polytechnic crest" width={36} height={36} className="h-full w-full object-contain" />
@@ -68,6 +73,7 @@ export function Sidebar({ role }: { role: UserRole }) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
                 active
@@ -84,6 +90,15 @@ export function Sidebar({ role }: { role: UserRole }) {
       <div className="border-t border-sidebar-border px-6 py-4 text-xs text-sidebar-foreground/50">
         {role === "admin" ? "Administrator" : role === "lecturer" ? "Lecturer" : "Student"} workspace
       </div>
+    </div>
+  );
+}
+
+/** Fixed sidebar shown on md+ screens. Hidden entirely on mobile — see MobileNav for the small-screen equivalent. */
+export function Sidebar({ role }: { role: UserRole }) {
+  return (
+    <aside className="print-hide hidden w-64 shrink-0 md:block">
+      <SidebarContent role={role} />
     </aside>
   );
 }
